@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+    <!--
+ -->
+  <jdbc-connection-pool 
+      name="struts_db_pool"
+      res-type="javax.sql.DataSource"
+      datasource-classname="org.apache.derby.jdbc.ClientDataSource"
+      pool-resize-quantity="2"
+      max-pool-size="32"
+      steady-pool-size="2"
+      statement-timeout-in-seconds="60" >
+        <property name="user" value="app"/>
+        <property name="password" value="app"/>
+        <property name="url" value="jdbc:derby://localhost:1527/struts_db"/>
+        <property name="databaseName" value="struts_db"/>
+ </jdbc-connection-pool>
+ 
+ <jdbc-resource jndi-name="jdbc/struts_db" pool-name="struts_db_pool" />
+</resources>
