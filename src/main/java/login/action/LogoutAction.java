@@ -13,9 +13,9 @@ import org.apache.struts.action.ActionMessages;
 import org.apache.struts.validator.DynaValidatorForm;
 
 /**
- * Java EE 6 より追加されたログイン機能によるレルム認証を行うアクション
+ * ログアウト
  */
-public class LoginAction extends org.apache.struts.action.Action {
+public class LogoutAction extends org.apache.struts.action.Action {
 
     /**
      *
@@ -31,32 +31,11 @@ public class LoginAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        
-        DynaValidatorForm _form = (DynaValidatorForm)form;
-        String id = _form.getString("id");
-        String password = _form.getString("password");
-        
-        
-        System.out.println("auth:" + request.getUserPrincipal());
         HttpSession session = request.getSession();
-        try {
             
-            request.login(id, password);
-            session.setAttribute("user", request.getUserPrincipal().getName());
+        request.logout();
+        session.invalidate();
             
-            return mapping.findForward("success");
-        } catch(ServletException e) { 
-            // 認証済みで、再度認証した場合も例外発生。
-            if (session.getAttribute("user") != null) {
-                return mapping.findForward("success");
-            }
-            
-            ActionMessages messages = new ActionMessages();
-            messages.add("error", new ActionMessage("message.invalid.login"));
-            
-            saveErrors(request, messages);
-            return mapping.findForward("error");
-            
-        }
+        return mapping.findForward("success");
     }
 }
