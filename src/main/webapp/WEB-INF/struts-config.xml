@@ -79,7 +79,7 @@
             scope="request"
             validate="true"
             input="/WEB-INF/view/login.jsp">
-            <forward name="success" path="/WEB-INF/view/products.jsp"/>
+            <forward name="success" path="/WEB-INF/view/welcome.jsp"/>
             <forward name="error" path="/WEB-INF/view/login.jsp"/>
         </action>
         <action
